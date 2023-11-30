@@ -1,4 +1,5 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, HasMany, Model, Table } from 'sequelize-typescript';
+import { Employee } from 'src/employees/employee.model';
 
 @Table({
     tableName: 'companies',
@@ -28,4 +29,7 @@ export class Company extends Model {
         allowNull: false,
     })
     phone_number: string;
+
+    @HasMany(() => Employee)
+    employees: Employee[]
 }

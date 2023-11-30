@@ -1,4 +1,5 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Company } from 'src/companies/company.model';
 
 @Table({
     tableName: 'employees',
@@ -13,6 +14,12 @@ export class Employee extends Model {
         primaryKey: true,
     })
     id: Number;
+
+    @ForeignKey(() => Company)
+    @Column({
+        allowNull: false,
+    })
+    company_id: Number;
 
     @Column({
         allowNull: false,
@@ -33,4 +40,7 @@ export class Employee extends Model {
         allowNull: false,
     })
     email: string;
+
+    @BelongsTo(() => Company)
+    company: Company;
 }
