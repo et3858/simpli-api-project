@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Company } from './company.model';
+import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
 
-const COMPANIES = ['Amazon', 'Apple', 'Google', 'Microsoft'];
 
 @Injectable()
 export class CompanyService {
@@ -11,23 +12,31 @@ export class CompanyService {
     private companyModel: typeof Company,
   ) {}
 
-  getCompanies(): string[] {
-    return COMPANIES;
+  async getCompanies(): Promise<Company[]> {
+    return this.companyModel.findAll();
   }
 
-  createCompany(): string {
-    return "A new company was created";
+  async createCompany(dto: CreateCompanyDto): Promise<Company> {
+    const company = await this.companyModel.create({ ...dto });
+
+    return company;
   }
 
-  getCompany(): string {
-    return COMPANIES[0];
+  async getCompany(id: string): Promise<Company> {
+    return this.companyModel.findByPk(id);
   }
 
-  updateCompany(): string {
-    return COMPANIES[1];
+  async updateCompany(id: string, dto: UpdateCompanyDto): Promise<Company> {
+    const company = await this.companyModel.findByPk(id);
+
+    company.set(dto);
+    await company.save();
+
+    return company;
   }
 
-  removeCompany(): string {
-    return "Company removed";
+  async removeCompany(id: string) {
+    const company = await this.companyModel.findByPk(id);
+    await company.destroy();
   }
 }

@@ -1,34 +1,36 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { CompanyService } from './companies.service';
+import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
 
 @Controller('companies')
 export class CompaniesController {
   constructor(private readonly companyService: CompanyService) {}
 
   @Get()
-  getCompanies(): string[] {
+  async getCompanies() {
     return this.companyService.getCompanies();
   }
 
   @Post()
   @HttpCode(201)
-  createCompany(): string {
-    return this.companyService.createCompany();
+  async createCompany(@Body() dto: CreateCompanyDto) {
+    return this.companyService.createCompany(dto);
   }
 
   @Get(':id')
-  findCompany(@Param('id') id: string): string {
-    return this.companyService.getCompany();
+  async findCompany(@Param('id') id: string) {
+    return this.companyService.getCompany(id);
   }
 
   @Put(':id')
-  updateCompany(@Param('id') id: string): string {
-    return this.companyService.updateCompany();
+  async updateCompany(@Param('id') id: string, @Body() dto: UpdateCompanyDto) {
+    return this.companyService.updateCompany(id, dto);
   }
 
   @Delete(':id')
   @HttpCode(204)
-  removeCompany(@Param('id') id: string): string {
-    return this.companyService.removeCompany();
+  async removeCompany(@Param('id') id: string) {
+    return this.companyService.removeCompany(id);
   }
 }
