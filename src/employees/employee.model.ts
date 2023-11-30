@@ -1,4 +1,4 @@
-import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Company } from 'src/companies/company.model';
 
 @Table({
@@ -13,13 +13,13 @@ export class Employee extends Model {
         autoIncrement: true,
         primaryKey: true,
     })
-    id: Number;
+    id: number;
 
     @ForeignKey(() => Company)
     @Column({
         allowNull: false,
     })
-    company_id: Number;
+    company_id: number;
 
     @Column({
         allowNull: false,
@@ -40,6 +40,16 @@ export class Employee extends Model {
         allowNull: false,
     })
     email: string;
+
+    @Column({
+        type: DataType.DATE,
+    })
+    created_at: string;
+
+    @Column({
+        type: DataType.DATE,
+    })
+    updated_at: string;
 
     @BelongsTo(() => Company)
     company: Company;
