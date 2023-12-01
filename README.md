@@ -34,16 +34,21 @@ npm install
 
 ```
 DB_DIALECT="YOUR_DIALECT"
-DB_NAME_DEV="YOUR_DB_NAME_DEV"
-DB_NAME_TEST="YOUR_DB_NAME_TEST"
-DB_NAME_PROD="YOUR_DB_NAME_PROD"
+DB_NAME_DEV="YOUR_DB_NAME_DEV.sqlite3"
+DB_NAME_TEST="YOUR_DB_NAME_TEST.sqlite3"
+DB_NAME_PROD="YOUR_DB_NAME_PROD.sqlite3"
 ```
 
 ### Run the migrations
 
-
 ```sh
 npx sequelize-cli db:migrate
+```
+
+### Run the seeders
+
+```sh
+npx sequelize-cli db:seed:all
 ```
 
 
@@ -54,6 +59,31 @@ npm run start
 ```
 
 By default, the project will be running at http://localhost:3000
+
+
+
+### Available endpoints
+
+```sh
+# Companies
+GET    '/companies'
+POST   '/companies'
+GET    '/companies:id'
+PUT    '/companies/:id'
+DELETE '/companies/:id'
+
+# Employees
+GET    '/employees'
+POST   '/employees'
+GET    '/employees:id'
+PUT    '/employees/:id'
+DELETE '/employees/:id'
+```
+
+NOTE: POST and PUT endpoints require some fields to be included in their DTOs.<br>
+For companies, thier fields are "name", "dni", "address" and "phone_number".<br>
+For employees, thier fields are "ftrst_name", "last_name","dni", "email" and "company_id" (FK).
+
 
 
 
