@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
-import { EmployeeService } from './employees.service';
+import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { IEmployee } from './interfaces/employee.interface';
 
 
 @Controller('employees')
-export class EmployeesController {
+export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Get()

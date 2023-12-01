@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 // Modules
 import { DatabaseModule } from './core/database/database.module';
 import { CompanyModule } from './companies/company.module';
-import { EmployeeModule } from './employees/employees.module';
+import { EmployeeModule } from './employees/employee.module';
 
 
 @Module({
