@@ -28,6 +28,11 @@ export class Company extends Model {
     @Column({
         allowNull: false,
     })
+    address: string;
+
+    @Column({
+        allowNull: false,
+    })
     phone_number: string;
 
     @Column({

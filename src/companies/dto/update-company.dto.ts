@@ -11,6 +11,10 @@ export class UpdateCompanyDto {
 
     @IsOptional()
     @IsNotEmpty()
+    readonly address: string
+
+    @IsOptional()
+    @IsNotEmpty()
     @IsPhoneNumber()
     readonly phone_number: string;
 }

@@ -11,6 +11,10 @@ export class CreateCompanyDto {
 
     @IsDefined()
     @IsNotEmpty()
+    readonly address: string
+
+    @IsDefined()
+    @IsNotEmpty()
     @IsPhoneNumber()
     readonly phone_number: string;
 }
