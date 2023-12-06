@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "first_name": "Roberto",
         "last_name": "Sanhueza",
         "dni": "10445837-8",
@@ -7,6 +8,7 @@
         "company_id": 1
     },
     {
+        "id": 2,
         "first_name": "Karen",
         "last_name": "Araya",
         "dni": "24533915-1",
@@ -14,6 +16,7 @@
         "company_id": 2
     },
     {
+        "id": 3,
         "first_name": "Pablo",
         "last_name": "Perez",
         "dni": "23392356-7",
@@ -21,6 +24,7 @@
         "company_id": 5
     },
     {
+        "id": 4,
         "first_name": "Sabrina",
         "last_name": "Ochoa",
         "dni": "18564433-2",
@@ -28,6 +32,7 @@
         "company_id": 4
     },
     {
+        "id": 5,
         "first_name": "Lazlo",
         "last_name": "Araneda",
         "dni": "8368016-4",
