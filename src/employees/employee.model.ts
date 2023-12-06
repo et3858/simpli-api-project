@@ -53,4 +53,16 @@ export class Employee extends Model {
 
     @BelongsTo(() => Company)
     company: Company;
+
+    /**
+     * Lazy eager load company data in an instance of Employee model
+     * @param options
+     */
+    async loadCompany(options = {}) {
+        const company = await this.$get('company', options);
+        this.setDataValue('company', company);
+        this.company = company;
+
+        return this;
+    }
 }
