@@ -13,17 +13,22 @@ export class EmployeeService {
   ) {}
 
   async getEmployees(): Promise<Employee[]> {
-    return this.employeeModel.findAll();
+    return this.employeeModel.findAll({
+      include: 'company'
+    });
   }
 
   async createEmployee(dto: CreateEmployeeDto): Promise<Employee> {
     const employee = await this.employeeModel.create({ ...dto });
+    await employee.loadCompany();
 
     return employee;
   }
 
   async getEmployee(id: string): Promise<Employee> {
-    return this.employeeModel.findByPk(id);
+    return this.employeeModel.findByPk(id, {
+      include: 'company',
+    });
   }
 
   async updateEmployee(id: string, dto: UpdateEmployeeDto): Promise<Employee> {
@@ -31,6 +36,7 @@ export class EmployeeService {
 
     employee.set(dto);
     await employee.save();
+    await employee.loadCompany();
 
     return employee;
   }
