@@ -68,14 +68,14 @@ By default, the project will be running at http://localhost:3000
 # Companies
 GET    '/companies'
 POST   '/companies'
-GET    '/companies:id'
+GET    '/companies/:id'
 PUT    '/companies/:id'
 DELETE '/companies/:id'
 
 # Employees
 GET    '/employees'
 POST   '/employees'
-GET    '/employees:id'
+GET    '/employees/:id'
 PUT    '/employees/:id'
 DELETE '/employees/:id'
 ```
