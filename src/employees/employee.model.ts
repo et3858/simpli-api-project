@@ -1,4 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { FindOptions } from 'sequelize';
 import { Company } from 'src/companies/company.model';
 
 @Table({
@@ -58,7 +59,7 @@ export class Employee extends Model {
      * Lazy eager load company data in an instance of Employee model
      * @param options
      */
-    async loadCompany(options = {}) {
+    async loadCompany(options: FindOptions = {}) {
         const company = await this.$get('company', options);
         this.setDataValue('company', company);
         this.company = company;
