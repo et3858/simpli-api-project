@@ -1,42 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
+import { Injectable, Inject } from '@nestjs/common';
 import { Company } from './company.model';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
+import { CompanyRepository } from './company.repository';
 
 
 @Injectable()
 export class CompanyService {
   constructor(
-    @InjectModel(Company)
-    private companyModel: typeof Company,
+    @Inject(CompanyRepository)
+    private readonly companyRepository: CompanyRepository
   ) {}
 
   async getCompanies(): Promise<Company[]> {
-    return this.companyModel.findAll();
+    const companies = await this.companyRepository.findAll();
+
+    return companies;
   }
 
   async createCompany(dto: CreateCompanyDto): Promise<Company> {
-    const company = await this.companyModel.create({ ...dto });
+    const company = await this.companyRepository.create(dto);
 
     return company;
   }
 
   async getCompany(id: string): Promise<Company> {
-    return this.companyModel.findByPk(id);
+    return this.companyRepository.findById(id);
   }
 
   async updateCompany(id: string, dto: UpdateCompanyDto): Promise<Company> {
-    const company = await this.companyModel.findByPk(id);
-
-    company.set(dto);
-    await company.save();
+    const company = await this.companyRepository.update(id, dto);
 
     return company;
   }
 
   async removeCompany(id: string) {
-    const company = await this.companyModel.findByPk(id);
-    await company.destroy();
+    await this.companyRepository.deleteById(id);
   }
 }
